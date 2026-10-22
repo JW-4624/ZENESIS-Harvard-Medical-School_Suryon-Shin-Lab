@@ -1,0 +1,188 @@
+{
+  "tool": "Helix Auto Slice",
+  "version": "1.0.0",
+  "createdAt": "2026-10-22T04:39:21.813Z",
+  "job": "8well_channels_200um_300um_gap",
+  "format": {
+    "id": "8well",
+    "label": "8 well",
+    "footprintMm": {
+      "width": 75,
+      "height": 25
+    }
+  },
+  "source": {
+    "type": "preset",
+    "kind": "channels",
+    "widthMm": 9,
+    "heightMm": 6,
+    "channelLengthMm": 3,
+    "channelWidthMm": 0.2,
+    "gapMm": 0.3,
+    "pitchMm": 0.5,
+    "wallMarginMm": 0.5,
+    "thicknessMm": 0.5,
+    "scale": 1
+  },
+  "model": {
+    "extentMm": {
+      "x": 9,
+      "y": 6,
+      "z": 0.5
+    }
+  },
+  "slicing": {
+    "layerHeightMm": 0.05,
+    "layerCount": 10,
+    "pixelSizeMm": 0.05,
+    "imageSizePx": {
+      "width": 1500,
+      "height": 500
+    },
+    "origin": "top-left, +x right, +y down (viewed from above)",
+    "encoding": "PNG 8-bit grayscale, 255 = exposed, 0 = dark"
+  },
+  "light": null,
+  "outputs": {
+    "plate": "plate/layer_NNNNN.png",
+    "wells": null
+  },
+  "wells": [
+    {
+      "id": "A1",
+      "centerMm": {
+        "x": 12,
+        "y": 7.167
+      },
+      "sizeMm": {
+        "width": 10,
+        "height": 7
+      },
+      "pixelRect": {
+        "x": 140,
+        "y": 73,
+        "w": 200,
+        "h": 140
+      }
+    },
+    {
+      "id": "A2",
+      "centerMm": {
+        "x": 29,
+        "y": 7.167
+      },
+      "sizeMm": {
+        "width": 10,
+        "height": 7
+      },
+      "pixelRect": {
+        "x": 480,
+        "y": 73,
+        "w": 200,
+        "h": 140
+      }
+    },
+    {
+      "id": "A3",
+      "centerMm": {
+        "x": 46,
+        "y": 7.167
+      },
+      "sizeMm": {
+        "width": 10,
+        "height": 7
+      },
+      "pixelRect": {
+        "x": 820,
+        "y": 73,
+        "w": 200,
+        "h": 140
+      }
+    },
+    {
+      "id": "A4",
+      "centerMm": {
+        "x": 63,
+        "y": 7.167
+      },
+      "sizeMm": {
+        "width": 10,
+        "height": 7
+      },
+      "pixelRect": {
+        "x": 1160,
+        "y": 73,
+        "w": 200,
+        "h": 140
+      }
+    },
+    {
+      "id": "B1",
+      "centerMm": {
+        "x": 12,
+        "y": 17.833
+      },
+      "sizeMm": {
+        "width": 10,
+        "height": 7
+      },
+      "pixelRect": {
+        "x": 140,
+        "y": 287,
+        "w": 200,
+        "h": 140
+      }
+    },
+    {
+      "id": "B2",
+      "centerMm": {
+        "x": 29,
+        "y": 17.833
+      },
+      "sizeMm": {
+        "width": 10,
+        "height": 7
+      },
+      "pixelRect": {
+        "x": 480,
+        "y": 287,
+        "w": 200,
+        "h": 140
+      }
+    },
+    {
+      "id": "B3",
+      "centerMm": {
+        "x": 46,
+        "y": 17.833
+      },
+      "sizeMm": {
+        "width": 10,
+        "height": 7
+      },
+      "pixelRect": {
+        "x": 820,
+        "y": 287,
+        "w": 200,
+        "h": 140
+      }
+    },
+    {
+      "id": "B4",
+      "centerMm": {
+        "x": 63,
+        "y": 17.833
+      },
+      "sizeMm": {
+        "width": 10,
+        "height": 7
+      },
+      "pixelRect": {
+        "x": 1160,
+        "y": 287,
+        "w": 200,
+        "h": 140
+      }
+    }
+  ]
+}
