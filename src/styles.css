@@ -1,0 +1,191 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * DLP Bioprinter Control — Medical Minimal Design System
+ * Calm clinical neutrals with a teal accent for live/active state and
+ * an amber accent for the curing UV light. All colors in oklch.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-uv: var(--uv);
+  --color-uv-foreground: var(--uv-foreground);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-display: "Inter", "SF Pro Display", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Clinical near-white surface, cool gray ink */
+  --background: oklch(0.99 0.003 230);
+  --foreground: oklch(0.22 0.02 240);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.02 240);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.02 240);
+
+  /* Primary = clinical teal */
+  --primary: oklch(0.58 0.11 200);
+  --primary-foreground: oklch(0.99 0.003 230);
+
+  --secondary: oklch(0.96 0.006 230);
+  --secondary-foreground: oklch(0.28 0.02 240);
+
+  --muted: oklch(0.96 0.006 230);
+  --muted-foreground: oklch(0.5 0.015 240);
+
+  --accent: oklch(0.94 0.02 200);
+  --accent-foreground: oklch(0.28 0.04 220);
+
+  --destructive: oklch(0.6 0.2 27);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --success: oklch(0.68 0.14 155);
+  --success-foreground: oklch(0.99 0 0);
+
+  --warning: oklch(0.78 0.14 80);
+  --warning-foreground: oklch(0.22 0.02 240);
+
+  /* UV cure indicator — clinical violet, never neon */
+  --uv: oklch(0.55 0.18 290);
+  --uv-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.92 0.008 230);
+  --input: oklch(0.92 0.008 230);
+  --ring: oklch(0.58 0.11 200);
+
+  --chart-1: oklch(0.58 0.11 200);
+  --chart-2: oklch(0.68 0.14 155);
+  --chart-3: oklch(0.78 0.14 80);
+  --chart-4: oklch(0.55 0.18 290);
+  --chart-5: oklch(0.5 0.015 240);
+
+  --sidebar: oklch(0.985 0.004 230);
+  --sidebar-foreground: oklch(0.28 0.02 240);
+  --sidebar-primary: oklch(0.58 0.11 200);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.94 0.012 220);
+  --sidebar-accent-foreground: oklch(0.22 0.02 240);
+  --sidebar-border: oklch(0.92 0.008 230);
+  --sidebar-ring: oklch(0.58 0.11 200);
+}
+
+.dark {
+  --background: oklch(0.18 0.015 240);
+  --foreground: oklch(0.96 0.006 230);
+  --card: oklch(0.22 0.018 240);
+  --card-foreground: oklch(0.96 0.006 230);
+  --popover: oklch(0.22 0.018 240);
+  --popover-foreground: oklch(0.96 0.006 230);
+  --primary: oklch(0.72 0.13 200);
+  --primary-foreground: oklch(0.18 0.015 240);
+  --secondary: oklch(0.26 0.02 240);
+  --secondary-foreground: oklch(0.96 0.006 230);
+  --muted: oklch(0.26 0.02 240);
+  --muted-foreground: oklch(0.7 0.02 230);
+  --accent: oklch(0.3 0.04 210);
+  --accent-foreground: oklch(0.96 0.006 230);
+  --destructive: oklch(0.65 0.2 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --success: oklch(0.7 0.14 155);
+  --success-foreground: oklch(0.18 0.015 240);
+  --warning: oklch(0.8 0.14 80);
+  --warning-foreground: oklch(0.18 0.015 240);
+  --uv: oklch(0.68 0.18 290);
+  --uv-foreground: oklch(0.18 0.015 240);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.72 0.13 200);
+  --sidebar: oklch(0.2 0.015 240);
+  --sidebar-foreground: oklch(0.96 0.006 230);
+  --sidebar-primary: oklch(0.72 0.13 200);
+  --sidebar-primary-foreground: oklch(0.18 0.015 240);
+  --sidebar-accent: oklch(0.26 0.02 240);
+  --sidebar-accent-foreground: oklch(0.96 0.006 230);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.72 0.13 200);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-display);
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+@layer utilities {
+  .stat-grid-bg {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--border) 60%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--border) 60%, transparent) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .pulse-dot {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--success) 60%, transparent);
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--success) 50%, transparent); }
+  50% { box-shadow: 0 0 0 6px color-mix(in oklab, var(--success) 0%, transparent); }
+}
