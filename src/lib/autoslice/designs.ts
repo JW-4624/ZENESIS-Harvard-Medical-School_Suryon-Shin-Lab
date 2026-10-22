@@ -2,7 +2,7 @@
 
 import type { Design2D } from "./sources";
 
-export type PresetKind = "disc" | "rectangle" | "lattice";
+export type PresetKind = "disc" | "rectangle" | "lattice" | "channels";
 
 export interface PresetParams {
   kind: PresetKind;
@@ -12,8 +12,10 @@ export interface PresetParams {
   height: number;
   /** Lattice line pitch, mm. */
   pitch: number;
-  /** Lattice line width, mm. */
+  /** Lattice line width, or channel width, mm. */
   strut: number;
+  /** Channel length, mm (channels only). */
+  length: number;
 }
 
 export function createPresetDesign(p: PresetParams): Design2D {
@@ -24,6 +26,32 @@ export function createPresetDesign(p: PresetParams): Design2D {
     }
     case "rectangle":
       return { width: p.width, height: p.height, inside: () => true };
+    case "channels": {
+      // Channels run along x; `pitch` is centre-to-centre, so the gap is pitch - strut.
+      // The array is tiled with the same gap in both directions and centred in the area.
+      const gap = Math.max(p.pitch - p.strut, 0);
+      const pitchY = Math.max(p.pitch, 1e-3);
+      const pitchX = Math.max(p.length + gap, 1e-3);
+      const eps = 1e-9;
+      const cols = Math.max(1, Math.floor((p.width + gap) / pitchX + eps));
+      const rows = Math.max(1, Math.floor((p.height + gap) / pitchY + eps));
+      const offX = (p.width - (cols * p.length + (cols - 1) * gap)) / 2;
+      const offY = (p.height - (rows * p.strut + (rows - 1) * gap)) / 2;
+      const along = (pos: number, size: number, pitch: number, count: number) => {
+        if (pos < 0) return false;
+        const k = Math.floor(pos / pitch + eps);
+        return k < count && pos - k * pitch <= size + eps;
+      };
+      return {
+        width: p.width,
+        height: p.height,
+        inside: (u, v) => {
+          const x = u + p.width / 2 - offX;
+          const y = v + p.height / 2 - offY;
+          return along(x, p.length, pitchX, cols) && along(y, p.strut, pitchY, rows);
+        },
+      };
+    }
     case "lattice": {
       const pitch = Math.max(p.pitch, p.strut * 1.01, 1e-3);
       const half = p.strut / 2;

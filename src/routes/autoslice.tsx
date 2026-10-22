@@ -95,6 +95,7 @@ function AutoSlicePage() {
     height: 4,
     pitch: 1,
     strut: 0.2,
+    length: 3,
   });
   const [inputError, setInputError] = useState<string | null>(null);
 
@@ -199,6 +200,7 @@ function AutoSlicePage() {
       height: preset.height * scale,
       pitch: preset.pitch * scale,
       strut: preset.strut * scale,
+      length: preset.length * scale,
     });
     return createExtrusionSource(design, thickness);
   }, [kind, stl, mask, imageWidth, preset, thickness, scale]);
@@ -474,11 +476,30 @@ function AutoSlicePage() {
                 <Segmented<PresetKind>
                   label="Shape"
                   value={preset.kind}
-                  onChange={(k) => setPreset((p) => ({ ...p, kind: k }))}
+                  onChange={(k) => {
+                    if (k === "channels") {
+                      // 8-well chamber (10 × 7 mm) minus a 0.5 mm margin per side: 9 × 6 mm,
+                      // 200 µm channels on a 500 µm pitch (300 µm gap), 3 mm long, 0.5 mm tall.
+                      setPreset((p) => ({
+                        ...p,
+                        kind: k,
+                        width: 9,
+                        height: 6,
+                        pitch: 0.5,
+                        strut: 0.2,
+                        length: 3,
+                      }));
+                      setThickness(0.5);
+                      setScaleMode("actual");
+                    } else {
+                      setPreset((p) => ({ ...p, kind: k }));
+                    }
+                  }}
                   options={[
                     { value: "disc", label: "Disc" },
                     { value: "rectangle", label: "Rectangle" },
                     { value: "lattice", label: "Lattice" },
+                    { value: "channels", label: "Channels" },
                   ]}
                 />
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -508,10 +529,20 @@ function AutoSlicePage() {
                     step={0.1}
                     onChange={setThickness}
                   />
-                  {preset.kind === "lattice" && (
+                  {(preset.kind === "lattice" || preset.kind === "channels") && (
                     <>
+                      {preset.kind === "channels" && (
+                        <NumberField
+                          label="Channel length"
+                          unit="mm"
+                          value={preset.length}
+                          min={0.1}
+                          step={0.5}
+                          onChange={(length) => setPreset((p) => ({ ...p, length }))}
+                        />
+                      )}
                       <NumberField
-                        label="Line pitch"
+                        label={preset.kind === "channels" ? "Channel pitch" : "Line pitch"}
                         unit="mm"
                         value={preset.pitch}
                         min={0.05}
@@ -519,7 +550,7 @@ function AutoSlicePage() {
                         onChange={(pitch) => setPreset((p) => ({ ...p, pitch }))}
                       />
                       <NumberField
-                        label="Line width"
+                        label={preset.kind === "channels" ? "Channel width" : "Line width"}
                         unit="mm"
                         value={preset.strut}
                         min={0.02}
